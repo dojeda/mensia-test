@@ -1,0 +1,5 @@
+I attach to this email a database where each directory contain data from a group of subjects. Each file is coded as follow:
+"subjectN_T" where "N" is subject number and "T" the time;
+each file contains 
+columns: EEG electrode in this order O1-O2-Oz-Cz-C3-C4-Fz-F8-F7-Fpz 
+lines : features extracted on these electrodes
