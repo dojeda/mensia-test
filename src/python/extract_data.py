@@ -25,7 +25,11 @@ class FileParserHelper:
         if not result:
             return {}
         else:
-            return result.groupdict()
+            rdict = result.groupdict()
+            rdict['group']   = 'group-{group}'.format(**rdict)
+            rdict['subject'] = 'subject-{subject}'.format(**rdict)
+            rdict['time']    = 'T{time}'.format(**rdict)
+            return rdict
 
     def extract_data(self, filename):
         "Extract features and columns from a csv file"
@@ -40,7 +44,7 @@ class FileParserHelper:
         df = pd.read_csv(filename,header=None,sep=';')
         assert(df.shape[1] == 10)
         df.columns = ['O1','O2','Oz','Cz','C3','C4','Fz','F8','F7','Fpz']
-        df['feature'] = ['ft-{}'.format(i) for i in range(df.shape[0])]
+        df['feature'] = ['Y{}'.format(i+1) for i in range(df.shape[0])]
 
         # Add individual,group,time information
         for key in extras:
