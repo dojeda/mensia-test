@@ -3,20 +3,7 @@
 import pandas as pd
 import numpy as np
 import scipy.stats as sps
-
-def permutation_test(X1, X2, nperm=1000):
-    values = np.concatenate((X1,X2))
-    differences = np.zeros(nperm)
-    nX1 = X1.size
-    nX2 = X2.size
-    indices = np.arange(nX1 + nX2)
-    for i in range(nperm):
-        np.random.shuffle(indices)
-        differences[i] = values[indices[:nX1]].mean() - values[indices[nX1:]].mean()
-
-    original_diff = np.abs(X1.mean() - X2.mean())
-    p = np.sum(np.abs(differences) >= original_diff) / nperm
-    return p
+from ptest import permutation_test
 
 datafile = 'data/full_data.csv'
 

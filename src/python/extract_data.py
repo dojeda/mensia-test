@@ -27,7 +27,7 @@ class FileParserHelper:
         else:
             rdict = result.groupdict()
             rdict['group']   = 'group-{group}'.format(**rdict)
-            rdict['subject'] = 'subject-{subject}'.format(**rdict)
+            rdict['subject'] = 'subject-{:02d}'.format(int(rdict['subject']))
             rdict['time']    = 'T{time}'.format(**rdict)
             return rdict
 
@@ -71,7 +71,7 @@ def main():
                 full_df = full_df.append(df,ignore_index=True)
 
     if full_df is not None:
-        full_df.to_csv(outputFile)
+        full_df.to_csv(outputFile,index=False)
 
 if __name__ == '__main__':
     main()
