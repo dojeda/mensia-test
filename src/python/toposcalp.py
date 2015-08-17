@@ -65,7 +65,7 @@ def plot1020(values, electrodes, axis, head=True):
 
     #cmap = cm.bwr
     c = mcolors.ColorConverter().to_rgb
-    cmap = make_colormap([c('red'), c('white'), 0.05, c('white'), c('blue')])
+    cmap = make_colormap([c('red'), c('white'), 0.1, c('white'), c('blue')])
     cres = axis.pcolor(Xi,Yi,Vi,cmap=cmap,vmin=0,vmax=1)
 
     if head:
