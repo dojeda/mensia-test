@@ -38,7 +38,6 @@ class FileParserHelper:
         if not extras:
             # Early stop when it's not the right kind of file
             return None
-        print('Reading',filename)
 
         # Read CSV data and rename columns accordingly
         df = pd.read_csv(filename,header=None,sep=';')
@@ -52,10 +51,7 @@ class FileParserHelper:
 
         return df
 
-def main():
-
-    dataPath = os.path.join(os.path.abspath('.'),'data')
-    outputFile = os.path.join(os.path.abspath('.'),'data','full_data.csv')
+def convert_files(dataPath, outputFile):
     parser = FileParserHelper()
     full_df = None
 
@@ -72,6 +68,10 @@ def main():
 
     if full_df is not None:
         full_df.to_csv(outputFile,index=False)
+    print('Read {} entries'.format(full_df.size))
+    print('First 5 elements in data frame:\n',full_df.head())
 
 if __name__ == '__main__':
-    main()
+    dataPath = os.path.join(os.path.abspath('.'),'data')
+    outputFile = os.path.join(os.path.abspath('.'),'data','full_data.csv')
+    convert_files(dataPath, outputFile)

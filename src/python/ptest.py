@@ -18,7 +18,7 @@ def permutation_test(X1, X2, nperm=1000):
 
     return p, original_diff, differences
 
-def plot_permutation_test(p,original_diff, differences, axis):
+def plot_permutation_test(p, original_diff, differences, axis):
 
     _,bins,patches = axis.hist(differences,bins=100,color='b',edgecolor='none')
     axis.axvline(x=original_diff,color='m',linewidth=2)
