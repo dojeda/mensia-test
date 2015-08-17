@@ -30,6 +30,36 @@ def plot_permutation_test(p, original_diff, differences, axis):
     axis.set_title('Permutation test p-value={:.3f}'.format(p))
 
 
+def interaction_plot(data, feature, electrode, factor1, factor2, axis):
+    grouped_data = data[data['feature']==feature].groupby([factor1,factor2])
+    mean_electrode = grouped_data[electrode].mean()
+    std_electrode  = grouped_data[electrode].std()
+
+    f1values = data[factor1].unique()
+    f2values = data[factor2].unique()
+    line_styles  = ['-', '--', '-.', ':']
+    line_colors  = list('brgcmyk')
+    line_markers = list('os^vx+')
+
+    for i,fi in enumerate(f1values):
+        ls = line_styles[i % len(line_styles)]
+        lc = line_colors[i % len(line_colors)]
+        lm = line_markers[i% len(line_markers)]
+        axis.plot(mean_electrode[fi],color=lc,linestyle=ls,marker=lm,label=fi)
+        # axis.errorbar(x=np.arange(f2values.size),
+        #               y=mean_electrode[fi],
+        #               yerr=std_electrode[fi],
+        #               color=lc,linestyle=ls,marker=lm)
+
+    axis.legend(title=factor1)
+    axis.set_xticks(np.arange(0,f2values.size))
+    axis.set_xlim((-0.1,f2values.size - .9))
+    axis.set_xticklabels(f2values)
+    axis.set_ylabel('Mean of {}'.format(electrode))
+    axis.set_xlabel(factor2)
+    axis.set_title('{} interactions for {}'.format(feature,electrode))
+
+
 def main():
     import matplotlib.pyplot as plt
     np.random.seed(0)
