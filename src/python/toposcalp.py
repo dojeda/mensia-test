@@ -57,7 +57,7 @@ def plot1020(values, electrodes, axis, head=True):
     gridpoints = np.linspace(-1,1,250)
     Xi,Yi = np.meshgrid(gridpoints, gridpoints)
 
-    rbf = spi.Rbf(Xe,Ye,values,epsilon=1) # RBF ignoring Z coordinates
+    rbf = spi.Rbf(Xe,Ye,values,epsilon=0.25) # RBF ignoring Z coordinates
     Vi = np.ma.masked_array(rbf(Xi,Yi))
 
     # Mask out of head values
@@ -77,6 +77,10 @@ def plot1020(values, electrodes, axis, head=True):
 
     # plot projection of electrodes on Z=0
     axis.plot(Ye,Xe,'go')
+    for i,elec in enumerate(electrodes):
+        axis.text(Ye[i]+.05*np.sign(Ye[i]),
+                  Xe[i]+.08*np.sign(Xe[i]),
+                  elec)
     axis.set_xlim((-1.1,1.1))
     axis.set_ylim((-1.1,1.1))
 
