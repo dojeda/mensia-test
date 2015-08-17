@@ -68,7 +68,7 @@ def convert_files(dataPath, outputFile):
 
     if full_df is not None:
         full_df.to_csv(outputFile,index=False)
-    print('Read {} entries'.format(full_df.size))
+    print('Read {} entries'.format(full_df.shape))
     print('First 5 elements in data frame:\n',full_df.head())
 
 if __name__ == '__main__':
